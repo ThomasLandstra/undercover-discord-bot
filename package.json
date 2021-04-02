@@ -1,0 +1,17 @@
+{
+  "name": "undercover-bot",
+  "version": "0.1.0",
+  "description": "Discord bot for the federation of ceos discord server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/bot.js",
+    "dev": "nodemon ./src/bot.js"
+  },
+  "author": "Thomas Landstra",
+  "license": "MIT",
+  "dependencies": {
+    "discord.js": "^12.5.2",
+    "dotenv": "^8.2.0"
+  }
+}
