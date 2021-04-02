@@ -6,7 +6,7 @@ const { Client, MessageEmbed } = require("discord.js");
 const client = new Client({
     partials: ["MESSAGE", "REACTION"]
 });
-const prefix = ".";
+const prefix = "-";
 const roleReactMsg = "827434586589102110";
 
 // Start Message
@@ -34,12 +34,16 @@ client.on('message', async message => {
                 .setDescription("<:YouTube:709605862985039872> : I am a YouTuber\n<:twitch_streamer:709581340382724246> : I am a Twitch Streamer\n:page_facing_up: : Notify me about: **Miscellaneous (including twitch channel updates, etc)**\n:circus_tent: : Notify me about: **Events (including stream events)**\n:camera_with_flash: : Notify me about: **YouTube Videos**")
                 .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
             message.channel.send(embed);
-        } else if(cmd === "") {
-
+        } else if(cmd === "help") {
+            const embed = new MessageEmbed()
+                .setTitle("Undercover Bot Help Menu")
+                .setColor(2072139)
+                .setDescription('*Server Prefix is "-"*')
+                .addField("Basic Commands", "**-help**  Displays a list of commands and gives a description.\n\n**-ping**  Command checks if the bot is online by making the bot send a message.", true)
+                .addField("Other Bot Roles", "**Role Giver:**  This bot gives you toles when you react to a message in <#709887008318816317>.", true)
+                .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
+            message.channel.send(embed);
         }
-    } else if(message.channel.id === "715689948711223366"){
-        message.react("⬆️");
-        message.react("⬇️");
     }
 
 });
@@ -64,14 +68,6 @@ client.on("messageReactionAdd", async (reaction, user) => {
             case "📸":
                 member.roles.add("709887160936824852");
                 break;
-        }
-    } else if(reaction.message.channel.id === "715689948711223366"){
-        if(name === "⬆️" || name === "⬇️"){
-            const totalReaction = reaction.message.reactions.resolve("⬆️").count + reaction.message.reactions.resolve("⬆⬇️").count
-            if(totalReaction > 7 && reaction.message.reactions.resolve("⬆️").count / totalReaction > 0.8){
-                member.roles.add("827443852192907264", "posted a good meme");
-                client.channels.get("709607662806892594").send("<@" + reaction.message.author.id + "> just became a meme god. GG!")
-            }
         }
     }
 }); 
