@@ -7,7 +7,7 @@ const client = new Client({
     partials: ["MESSAGE", "REACTION"]
 });
 const prefix = ".";
-const roleReactMsg = "827431500324536350";
+const roleReactMsg = "827434586589102110";
 
 // Start Message
 client.on('ready', () => {
