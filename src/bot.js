@@ -1,6 +1,6 @@
 // Requirements
 require("dotenv").config();
-const { Client, MessageEmbed, Message, Guild } = require("discord.js");
+const { Client, MessageEmbed } = require("discord.js");
 
 // Create required variables
 const client = new Client({
@@ -16,7 +16,7 @@ client.on('ready', () => {
   
 
 // Reaction Panel Send Command
-client.on('message', message => {
+client.on('message', async message => {
     if (message.author.bot) return; // If message was sent by a got ignore
     if (message.content.startsWith(prefix)){ // If the message was sent with the prefix
         const [cmd, ...args] = message.content
@@ -24,7 +24,7 @@ client.on('message', message => {
             .substring(prefix.length)
             .split(/\s+/);
         if(cmd === "ping"){
-            message.channel.send("pong");
+            message.channel.send("<@"+message.author.id+"> pong!");
         } else if(cmd === "reactMsg" && message.author.id === "277186846117724160"){
             message.delete();
 
@@ -34,7 +34,7 @@ client.on('message', message => {
                 .setDescription("<:YouTube:709605862985039872> : I am a YouTuber\n<:twitch_streamer:709581340382724246> : I am a Twitch Streamer\n:page_facing_up: : Notify me about: **Miscellaneous (including twitch channel updates, etc)**\n:circus_tent: : Notify me about: **Events (including stream events)**\n:camera_with_flash: : Notify me about: **YouTube Videos**")
                 .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
             message.channel.send(embed);
-        } else if(true) {
+        } else if(cmd === "") {
 
         }
     } else if(message.channel.id === "715689948711223366"){
@@ -44,7 +44,7 @@ client.on('message', message => {
 
 });
 
-client.on("messageReactionAdd", (reaction, user) => {
+client.on("messageReactionAdd", async (reaction, user) => {
     const { name } = reaction.emoji;
     const member = reaction.message.guild.members.cache.get(user.id);
     if (reaction.message.id === roleReactMsg){
@@ -70,13 +70,13 @@ client.on("messageReactionAdd", (reaction, user) => {
             const totalReaction = reaction.message.reactions.resolve("⬆️").count + reaction.message.reactions.resolve("⬆⬇️").count
             if(totalReaction > 7 && reaction.message.reactions.resolve("⬆️").count / totalReaction > 0.8){
                 member.roles.add("827443852192907264", "posted a good meme");
-                client.channels.get("709607662806892594").send(reaction.message.author.username + " just became a meme god. GG!")
+                client.channels.get("709607662806892594").send("<@" + reaction.message.author.id + "> just became a meme god. GG!")
             }
         }
     }
 }); 
 
-client.on("messageReactionRemove", (reaction, user) => {
+client.on("messageReactionRemove", async (reaction, user) => {
     const { name } = reaction.emoji;
     const member = reaction.message.guild.members.cache.get(user.id);
     if (reaction.message.id === roleReactMsg){
