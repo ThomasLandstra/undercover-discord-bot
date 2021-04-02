@@ -7,7 +7,7 @@ const client = new Client({
     partials: ["MESSAGE", "REACTION"]
 });
 const prefix = ".";
-const roleReactMsg = "827400113261379644";
+const roleReactMsg = "827431500324536350";
 
 // Start Message
 client.on('ready', () => {
@@ -42,7 +42,6 @@ client.on('message', message => {
 client.on("messageReactionAdd", (reaction, user) => {
     const { name } = reaction.emoji;
     const member = reaction.message.guild.members.cache.get(user.id);
-    console.log(name)
     if (reaction.message.id === roleReactMsg){
         switch (name) {
             case "YouTube":
@@ -67,7 +66,6 @@ client.on("messageReactionAdd", (reaction, user) => {
 client.on("messageReactionRemove", (reaction, user) => {
     const { name } = reaction.emoji;
     const member = reaction.message.guild.members.cache.get(user.id);
-    console.log(name)
     if (reaction.message.id === roleReactMsg){
         switch (name) {
             case "YouTube":
