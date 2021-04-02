@@ -7,6 +7,7 @@ const client = new Client({
     partials: ["MESSAGE", "REACTION"]
 });
 const prefix = ".";
+const roleReactMsg = "827400113261379644";
 
 // Start Message
 client.on('ready', () => {
@@ -23,7 +24,7 @@ client.on('message', message => {
             .substring(prefix.length)
             .split(/\s+/);
         if(cmd === "ping"){
-            message.channel.send("pong")
+            message.channel.send("pong");
         } else if(cmd === "reactMsg"){
             message.delete();
 
@@ -42,7 +43,7 @@ client.on("messageReactionAdd", (reaction, user) => {
     const { name } = reaction.emoji;
     const member = reaction.message.guild.members.cache.get(user.id);
     console.log(name)
-    if (reaction.message.id === "827400113261379644"){
+    if (reaction.message.id === roleReactMsg){
         switch (name) {
             case "YouTube":
                 member.roles.add("709529044072267906");
@@ -67,7 +68,7 @@ client.on("messageReactionRemove", (reaction, user) => {
     const { name } = reaction.emoji;
     const member = reaction.message.guild.members.cache.get(user.id);
     console.log(name)
-    if (reaction.message.id === "827400113261379644"){
+    if (reaction.message.id === roleReactMsg){
         switch (name) {
             case "YouTube":
                 member.roles.remove("709529044072267906");
