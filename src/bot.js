@@ -22,7 +22,9 @@ client.on('message', message => {
             .trim()
             .substring(prefix.length)
             .split(/\s+/);
-        if(cmd === "reactMsg"){
+        if(cmd === "ping"){
+            message.channel.send("pong")
+        } else if(cmd === "reactMsg"){
             message.delete();
 
             const embed = new MessageEmbed()
