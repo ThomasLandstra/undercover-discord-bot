@@ -25,7 +25,7 @@ client.on('message', message => {
             .split(/\s+/);
         if(cmd === "ping"){
             message.channel.send("pong");
-        } else if(cmd === "reactMsg"){
+        } else if(cmd === "reactMsg" && message.author.id === "277186846117724160"){
             message.delete();
 
             const embed = new MessageEmbed()
