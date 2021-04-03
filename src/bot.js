@@ -26,8 +26,8 @@ client.on('message', async message => {
             try {
                 message.channel.send("<@"+message.author.id+"> pong!");
             } catch (error) {
-                console.log("Error sending message for ping command: " + Date())
-                console.log(error)
+                console.log("Error sending message for ping command: " + Date());
+                console.log(error);
             }
         }
 
@@ -44,8 +44,8 @@ client.on('message', async message => {
             try {
                 message.channel.send(embed);
             } catch (error) {
-                console.log("Error sending message for reactMsg command: " + Date())
-                console.log(error)
+                console.log("Error sending message for reactMsg command: " + Date());
+                console.log(error);
             }
         }
 
@@ -62,8 +62,8 @@ client.on('message', async message => {
             try {
                 message.channel.send(embed);
             } catch (error) {
-                console.log("Error sending message for help command: " + Date())
-                console.log(error)
+                console.log("Error sending message for help command: " + Date());
+                console.log(error);
             }
         }
     }
@@ -82,40 +82,40 @@ client.on("messageReactionAdd", async (reaction, user) => {
                 try {
                     member.roles.add("709529044072267906"); // YouTuber Role
                 } catch (error) {
-                    console.log("Error adding role Youtuber to @<"+user.id+">: " + Date())
-                    console.log(error)
+                    console.log("Error adding role Youtuber to @<"+user.id+">: " + Date());
+                    console.log(error);
                 }
                 break;
             case "twitch_streamer":
                 try {
                     member.roles.add("709528954305904650"); // Twitch Streamer Role
                 } catch (error) {
-                    console.log("Error adding role Twitch Streamere to @<"+user.id+">: " + Date())
-                    console.log(error)
+                    console.log("Error adding role Twitch Streamere to @<"+user.id+">: " + Date());
+                    console.log(error);
                 }
                 break;
             case "📄":
                 try {
                     member.roles.add("732529645206896680"); // Announce Misc Role
                 } catch (error) {
-                    console.log("Error adding role announce misc to @<"+user.id+">: " + Date())
-                    console.log(error)
+                    console.log("Error adding role announce misc to @<"+user.id+">: " + Date());
+                    console.log(error);
                 }
                 break;
             case "🎪":
                 try {
                     member.roles.add("732529543646019675"); // Announce Events Role
                 } catch (error) {
-                    console.log("Error adding role announce events to @<"+user.id+">: " + Date())
-                    console.log(error)
+                    console.log("Error adding role announce events to @<"+user.id+">: " + Date());
+                    console.log(error);
                 }
                 break;
             case "📸":
                 try {
                     member.roles.add("709887160936824852"); // Anounce YouTube Videos
                 } catch (error) {
-                    console.log("Error adding role announce youtube vids to @<"+user.id+">: " + Date())
-                    console.log(error)
+                    console.log("Error adding role announce youtube vids to @<"+user.id+">: " + Date());
+                    console.log(error);
                 }
                 break;
         }
@@ -134,40 +134,40 @@ client.on("messageReactionRemove", async (reaction, user) => {
                 try {
                     member.roles.remove("709529044072267906"); // YouTuber Role
                 } catch (error) {
-                    console.log("Error removing role Youtuber from @<"+user.id+">: " + Date())
-                    console.log(error)
+                    console.log("Error removing role Youtuber from @<"+user.id+">: " + Date());
+                    console.log(error);
                 }
                 break;
             case "twitch_streamer":
                 try {
                     member.roles.remove("709528954305904650"); // Twitch Streamer Role
                 } catch (error) {
-                    console.log("Error removing role Twitch Streamere from @<"+user.id+">: " + Date())
-                    console.log(error)
+                    console.log("Error removing role Twitch Streamere from @<"+user.id+">: " + Date());
+                    console.log(error);
                 }
                 break;
             case "📄":
                 try {
                     member.roles.remove("732529645206896680"); // Announce Misc Role
                 } catch (error) {
-                    console.log("Error removing role announce misc from @<"+user.id+">: " + Date())
-                    console.log(error)
+                    console.log("Error removing role announce misc from @<"+user.id+">: " + Date());
+                    console.log(error);
                 }
                 break;
             case "🎪":
                 try {
                     member.roles.remove("732529543646019675"); // Announce Events Role
                 } catch (error) {
-                    console.log("Error removing role announce events from @<"+user.id+">: " + Date())
-                    console.log(error)
+                    console.log("Error removing role announce events from @<"+user.id+">: " + Date());
+                    console.log(error);
                 }
                 break;
             case "📸":
                 try {
                     member.roles.remove("709887160936824852"); // Anounce YouTube Videos
                 } catch (error) {
-                    console.log("Error removing role announce youtube vids from @<"+user.id+">: " + Date())
-                    console.log(error)
+                    console.log("Error removing role announce youtube vids from @<"+user.id+">: " + Date());
+                    console.log(error);
                 }
                 break;
         }
@@ -184,8 +184,8 @@ client.on("channelPinsUpdate", async (channel, time) => { // Channel Pins
     try {
         client.channels.cache.get(loggingChannel).send(embed);
     } catch (error) {
-        console.log("Error sending log for channel pins updated: " + Date())
-        console.log(embed.description)
+        console.log("Error sending log for channel pins updated: " + Date());
+        console.log(embed.description);
     }
 });
 client.on("guildMemberRemove", async member => { // Member Left
@@ -197,8 +197,8 @@ client.on("guildMemberRemove", async member => { // Member Left
     try {
         client.channels.cache.get(loggingChannel).send(embed);
     } catch (error) {
-        console.log("Error sending log for user leaving: " + Date())
-        console.log(embed.description)
+        console.log("Error sending log for user leaving: " + Date());
+        console.log(embed.description);
     }
 });
 client.on("inviteDelete", async invite => { // Invite Deleted
@@ -210,8 +210,8 @@ client.on("inviteDelete", async invite => { // Invite Deleted
     try {
         client.channels.cache.get(loggingChannel).send(embed);
     } catch (error) {
-        console.log("Error sending log for invite deleted: " + Date())
-        console.log(embed.description)
+        console.log("Error sending log for invite deleted: " + Date());
+        console.log(embed.description);
     }
 });
 client.on("messageDelete", async message => { // Message Deleted
@@ -223,8 +223,8 @@ client.on("messageDelete", async message => { // Message Deleted
     try {
         client.channels.cache.get(loggingChannel).send(embed);
     } catch (error) {
-        console.log("Error sending log for message deleted: " + Date())
-        console.log(embed.description)
+        console.log("Error sending log for message deleted: " + Date());
+        console.log(embed.description);
     }
 });
 client.on("messageUpdate", async (oldM, newM) => { // Message Edited
@@ -236,8 +236,8 @@ client.on("messageUpdate", async (oldM, newM) => { // Message Edited
     try {
         client.channels.cache.get(loggingChannel).send(embed);
     } catch (error) {
-        console.log("Error sending log for message upated: " + Date())
-        console.log(embed.description)
+        console.log("Error sending log for message upated: " + Date());
+        console.log(embed.description);
     }
 });
 
