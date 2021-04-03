@@ -16,6 +16,10 @@ This is a discord bot made for the [Federation of CEOs](https://discord.gg/RWcnq
 
 - added exeption handling
 
+#### Patch 0.3.2
+
+- added two extra logging events
+
 ### V0.2.0
 
 - added help command.
