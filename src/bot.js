@@ -76,7 +76,7 @@ client.on('message', async message => {
                 if(cmd === "kick"){
                     try {
                         let member = message.mentions.members.first();
-                        const reason = args[1, args.length-1].join(" ")+"."
+                        const reason = args[1, args.length-1].join(" ")+".";
                         member.kick(reason);
                         message.delete();
                         const embed = new MessageEmbed()
@@ -84,10 +84,10 @@ client.on('message', async message => {
                             .setColor(2072139)
                             .setDescription("<@"+member.id+"> was kicked: " + reason)
                             .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-                        message.channel.send(embed)
+                        message.channel.send(embed);
                     } catch (error) {
-                        console.log("Error occured when kicking <@"+member.id+">. " + Date())
-                        console.log(error)
+                        console.log("Error occured when kicking <@"+member.id+">. " + Date());
+                        console.log(error);
                     }
                 }
 
@@ -95,7 +95,7 @@ client.on('message', async message => {
                 else if(cmd === "ban"){
                     try {
                         let member = message.mentions.members.first();
-                        const reason = args[1, args.length-1].join(" ")+"."
+                        const reason = args[1, args.length-1].join(" ")+".";
                         member.ban(reason);
                         message.delete();
                         const embed = new MessageEmbed()
@@ -103,19 +103,23 @@ client.on('message', async message => {
                             .setColor(2072139)
                             .setDescription("<@"+member.id+"> was banned: " + reason)
                             .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-                        message.channel.send(embed)
+                        message.channel.send(embed);
                     } catch (error) {
-                        console.log("Error occured when banning <@"+member.id+">. " + Date())
-                        console.log(error)
+                        console.log("Error occured when banning <@"+member.id+">. " + Date());
+                        console.log(error);
                     }
                 }
 
                 // Purge command
                 else if(cmd === "purge"){
-                    
+                    await message.channel.bulkDelete(parseInt(args[0]) + 1)
+                        .catch(err => {
+                            console.log("Error occured when purgin messaged: " + Date())
+                            console.log(err);
+                        });
                 }
             } else if(cmd === "kick" || cmd === "ban" || cmd === "purge"){
-                message.channel.send("That's an admin command dummy.")
+                message.channel.send("That's an admin command dummy.");
             }
         }
     }
