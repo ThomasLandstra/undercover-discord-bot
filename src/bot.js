@@ -108,7 +108,7 @@ client.on("messageReactionRemove", async (reaction, user) => {
 }); 
 
 // Logging
-client.on("channelPinsUpdate", async (channel, time) => {
+client.on("channelPinsUpdate", async (channel, time) => { // Channel Pins
     const embed = new MessageEmbed()
         .setTitle("Channel Pins Updated")
         .setColor(9427684)
@@ -116,7 +116,7 @@ client.on("channelPinsUpdate", async (channel, time) => {
         .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
     client.channels.cache.get(loggingChannel).send(embed);
 });
-client.on("guildMemberRemove", async member => {
+client.on("guildMemberRemove", async member => { // Member Left
     const embed = new MessageEmbed()
         .setTitle("Member Left")
         .setColor(9427684)
@@ -124,7 +124,7 @@ client.on("guildMemberRemove", async member => {
         .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
     client.channels.cache.get(loggingChannel).send(embed);
 });
-client.on("inviteDelete", async invite => {
+client.on("inviteDelete", async invite => { // Invite Deleted
     const embed = new MessageEmbed()
         .setTitle("Invite Deleted")
         .setColor(9427684)
@@ -132,7 +132,7 @@ client.on("inviteDelete", async invite => {
         .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
     client.channels.cache.get(loggingChannel).send(embed);
 });
-client.on("messageDelete", async message => {
+client.on("messageDelete", async message => { // Message Deleted
     const embed = new MessageEmbed()
         .setTitle("Message Deleted")
         .setColor(9427684)
@@ -140,7 +140,7 @@ client.on("messageDelete", async message => {
         .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
     client.channels.cache.get(loggingChannel).send(embed);
 });
-client.on("messageUpdate", async (oldM, newM) => {
+client.on("messageUpdate", async (oldM, newM) => { // Message Edited
     const embed = new MessageEmbed()
         .setTitle("Message Edited")
         .setColor(9427684)
