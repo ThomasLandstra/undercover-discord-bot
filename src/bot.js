@@ -14,7 +14,7 @@ client.on('ready', () => {
 });
   
 
-// Reaction Panel Send Command
+// Commands
 client.on('message', async message => {
     if (message.author.bot) return; // If message was sent by a got ignore
     if (message.content.startsWith(prefix)){ // If the message was sent with the prefix
@@ -23,7 +23,12 @@ client.on('message', async message => {
 
         //Ping Command
         if(cmd === "ping"){
-            message.channel.send("<@"+message.author.id+"> pong!");
+            try {
+                message.channel.send("<@"+message.author.id+"> pong!");
+            } catch (error) {
+                console.log("Error sending message for ping command: " + Date())
+                console.log(error)
+            }
         }
 
         // Send Role React Message Command
@@ -35,7 +40,13 @@ client.on('message', async message => {
                 .setColor(0xff0000)
                 .setDescription("<:YouTube:709605862985039872> : I am a YouTuber\n<:twitch_streamer:709581340382724246> : I am a Twitch Streamer\n:page_facing_up: : Notify me about: **Miscellaneous (including twitch channel updates, etc)**\n:circus_tent: : Notify me about: **Events (including stream events)**\n:camera_with_flash: : Notify me about: **YouTube Videos**")
                 .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-            message.channel.send(embed);
+
+            try {
+                message.channel.send(embed);
+            } catch (error) {
+                console.log("Error sending message for reactMsg command: " + Date())
+                console.log(error)
+            }
         }
 
         // Help Command
@@ -47,7 +58,13 @@ client.on('message', async message => {
                 .addField("Basic Commands", "**-help**  Displays a list of commands and gives a description.\n\n**-ping**  Command checks if the bot is online by making the bot send a message.", true)
                 .addField("Other Bot Roles", "**Role Giver:**  This bot gives you toles when you react to a message in <#709887008318816317>.", true)
                 .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-            message.channel.send(embed);
+
+            try {
+                message.channel.send(embed);
+            } catch (error) {
+                console.log("Error sending message for help command: " + Date())
+                console.log(error)
+            }
         }
     }
 
@@ -62,19 +79,44 @@ client.on("messageReactionAdd", async (reaction, user) => {
     if (reaction.message.id === roleReactMsg){
         switch (name) {
             case "YouTube":
-                member.roles.add("709529044072267906"); // YouTuber Role
+                try {
+                    member.roles.add("709529044072267906"); // YouTuber Role
+                } catch (error) {
+                    console.log("Error adding role Youtuber to @<"+user.id+">: " + Date())
+                    console.log(error)
+                }
                 break;
             case "twitch_streamer":
-                member.roles.add("709528954305904650"); // Twitch Streamer Role
+                try {
+                    member.roles.add("709528954305904650"); // Twitch Streamer Role
+                } catch (error) {
+                    console.log("Error adding role Twitch Streamere to @<"+user.id+">: " + Date())
+                    console.log(error)
+                }
                 break;
             case "📄":
-                member.roles.add("732529645206896680"); // Announce Misc Role
+                try {
+                    member.roles.add("732529645206896680"); // Announce Misc Role
+                } catch (error) {
+                    console.log("Error adding role announce misc to @<"+user.id+">: " + Date())
+                    console.log(error)
+                }
                 break;
             case "🎪":
-                member.roles.add("732529543646019675"); // Announce Events Role
+                try {
+                    member.roles.add("732529543646019675"); // Announce Events Role
+                } catch (error) {
+                    console.log("Error adding role announce events to @<"+user.id+">: " + Date())
+                    console.log(error)
+                }
                 break;
             case "📸":
-                member.roles.add("709887160936824852"); // Anounce YouTube Videos
+                try {
+                    member.roles.add("709887160936824852"); // Anounce YouTube Videos
+                } catch (error) {
+                    console.log("Error adding role announce youtube vids to @<"+user.id+">: " + Date())
+                    console.log(error)
+                }
                 break;
         }
     }
@@ -89,19 +131,44 @@ client.on("messageReactionRemove", async (reaction, user) => {
     if (reaction.message.id === roleReactMsg){
         switch (name) {
             case "YouTube":
-                member.roles.remove("709529044072267906"); // YouTuber Role
+                try {
+                    member.roles.remove("709529044072267906"); // YouTuber Role
+                } catch (error) {
+                    console.log("Error removing role Youtuber from @<"+user.id+">: " + Date())
+                    console.log(error)
+                }
                 break;
             case "twitch_streamer":
-                member.roles.remove("709528954305904650"); // Twitch Streamer Role
+                try {
+                    member.roles.remove("709528954305904650"); // Twitch Streamer Role
+                } catch (error) {
+                    console.log("Error removing role Twitch Streamere from @<"+user.id+">: " + Date())
+                    console.log(error)
+                }
                 break;
             case "📄":
-                member.roles.remove("732529645206896680"); // Announce Misc Role
+                try {
+                    member.roles.remove("732529645206896680"); // Announce Misc Role
+                } catch (error) {
+                    console.log("Error removing role announce misc from @<"+user.id+">: " + Date())
+                    console.log(error)
+                }
                 break;
             case "🎪":
-                member.roles.remove("732529543646019675"); // Announce Events Role
+                try {
+                    member.roles.remove("732529543646019675"); // Announce Events Role
+                } catch (error) {
+                    console.log("Error removing role announce events from @<"+user.id+">: " + Date())
+                    console.log(error)
+                }
                 break;
             case "📸":
-                member.roles.remove("709887160936824852"); // Anounce YouTube Videos
+                try {
+                    member.roles.remove("709887160936824852"); // Anounce YouTube Videos
+                } catch (error) {
+                    console.log("Error removing role announce youtube vids from @<"+user.id+">: " + Date())
+                    console.log(error)
+                }
                 break;
         }
     }
@@ -114,7 +181,12 @@ client.on("channelPinsUpdate", async (channel, time) => { // Channel Pins
         .setColor(9427684)
         .setDescription("New channel pin in <#"+ channel.id +">")
         .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-    client.channels.cache.get(loggingChannel).send(embed);
+    try {
+        client.channels.cache.get(loggingChannel).send(embed);
+    } catch (error) {
+        console.log("Error sending log for channel pins updated: " + Date())
+        console.log(embed.description)
+    }
 });
 client.on("guildMemberRemove", async member => { // Member Left
     const embed = new MessageEmbed()
@@ -122,7 +194,12 @@ client.on("guildMemberRemove", async member => { // Member Left
         .setColor(9427684)
         .setDescription("<@"+ member.id +"> left the server.")
         .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-    client.channels.cache.get(loggingChannel).send(embed);
+    try {
+        client.channels.cache.get(loggingChannel).send(embed);
+    } catch (error) {
+        console.log("Error sending log for user leaving: " + Date())
+        console.log(embed.description)
+    }
 });
 client.on("inviteDelete", async invite => { // Invite Deleted
     const embed = new MessageEmbed()
@@ -130,7 +207,12 @@ client.on("inviteDelete", async invite => { // Invite Deleted
         .setColor(9427684)
         .setDescription("Invite Deleted:\n"+invite.channel+"\n["+invite.url+"]("+invite.url+")")
         .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-    client.channels.cache.get(loggingChannel).send(embed);
+    try {
+        client.channels.cache.get(loggingChannel).send(embed);
+    } catch (error) {
+        console.log("Error sending log for invite deleted: " + Date())
+        console.log(embed.description)
+    }
 });
 client.on("messageDelete", async message => { // Message Deleted
     const embed = new MessageEmbed()
@@ -138,7 +220,12 @@ client.on("messageDelete", async message => { // Message Deleted
         .setColor(9427684)
         .setDescription("<@"+message.author.id+"> **in** <#"+message.channel.id+">\n"+message.content)
         .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-    client.channels.cache.get(loggingChannel).send(embed);
+    try {
+        client.channels.cache.get(loggingChannel).send(embed);
+    } catch (error) {
+        console.log("Error sending log for message deleted: " + Date())
+        console.log(embed.description)
+    }
 });
 client.on("messageUpdate", async (oldM, newM) => { // Message Edited
     const embed = new MessageEmbed()
@@ -146,7 +233,12 @@ client.on("messageUpdate", async (oldM, newM) => { // Message Edited
         .setColor(9427684)
         .setDescription("Message from <@"+oldM.author.id+"> in <#"+oldM.channel.id+"> edited\n**Old:** "+oldM.content+"\n**New:** "+newM.content)
         .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-    client.channels.cache.get(loggingChannel).send(embed);
+    try {
+        client.channels.cache.get(loggingChannel).send(embed);
+    } catch (error) {
+        console.log("Error sending log for message upated: " + Date())
+        console.log(embed.description)
+    }
 });
 
 // Run bot
