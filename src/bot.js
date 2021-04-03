@@ -240,6 +240,34 @@ client.on("messageUpdate", async (oldM, newM) => { // Message Edited
         console.log(embed.description);
     }
 });
+client.on("guildBanRemove", async (guild, user) => {
+    const embed = new MessageEmbed()
+        .setTitle("Message Edited")
+        .setColor(9427684)
+        .setDescription("<@"+user.id+"> was unbanned.")
+        .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
+    try {
+        client.channels.cache.get(loggingChannel).send(embed);
+    } catch (error) {
+        console.log("Error sending log for member unbanned: " + Date());
+        console.log(embed.description);
+    }
+});
+client.on("userUpdate", async (oldM, newM) => {
+    if(oldM.username !== newM.username){
+        const embed = new MessageEmbed()
+            .setTitle("Message Edited")
+            .setColor(9427684)
+            .setDescription("<@"+newM.id+"> renamed.\n**Old:** "+oldM.username+"\n**New:** "+newM.username)
+            .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
+        try {
+            client.channels.cache.get(loggingChannel).send(embed);
+        } catch (error) {
+            console.log("Error sending log for member changedd: " + Date());
+            console.log(embed.description);
+        }
+    }
+});
 
 // Run bot
 client.login(process.env.DISCORDJS_BOT_TOKEN);
