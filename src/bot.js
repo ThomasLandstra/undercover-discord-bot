@@ -5,6 +5,7 @@ const { Client, MessageEmbed, Channel } = require("discord.js");
 // Create required variables
 const client = new Client({partials: ["MESSAGE", "REACTION"]});
 const prefix = "-";
+const adminRoles = [];
 const roleReactMsg = "827434586589102110";
 const loggingChannel = "709891365709938728";
 
@@ -61,9 +62,60 @@ client.on('message', async message => {
 
             try {
                 message.channel.send(embed);
+                message.delete();
             } catch (error) {
                 console.log("Error sending message for help command: " + Date());
                 console.log(error);
+            }
+        }
+
+        // Admin Commands
+        for(let x = 0;x>adminRoles.length;x++){
+            if(message.member.roles.cache.has(adminRoles[x])){
+                // Kick command
+                if(cmd === "kick"){
+                    try {
+                        let member = message.mentions.members.first();
+                        const reason = args[1, args.length-1].join(" ")+"."
+                        member.kick(reason);
+                        message.delete();
+                        const embed = new MessageEmbed()
+                            .setTitle("Undercover Bot ")
+                            .setColor(2072139)
+                            .setDescription("<@"+member.id+"> was kicked: " + reason)
+                            .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
+                        message.channel.send(embed)
+                    } catch (error) {
+                        console.log("Error occured when kicking <@"+member.id+">. " + Date())
+                        console.log(error)
+                    }
+                }
+
+                // Ban command
+                else if(cmd === "ban"){
+                    try {
+                        let member = message.mentions.members.first();
+                        const reason = args[1, args.length-1].join(" ")+"."
+                        member.ban(reason);
+                        message.delete();
+                        const embed = new MessageEmbed()
+                            .setTitle("Undercover Bot ")
+                            .setColor(2072139)
+                            .setDescription("<@"+member.id+"> was banned: " + reason)
+                            .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
+                        message.channel.send(embed)
+                    } catch (error) {
+                        console.log("Error occured when banning <@"+member.id+">. " + Date())
+                        console.log(error)
+                    }
+                }
+
+                // Purge command
+                else if(cmd === "purge"){
+                    
+                }
+            } else if(cmd === "kick" || cmd === "ban" || cmd === "purge"){
+                message.channel.send("That's an admin command dummy.")
             }
         }
     }
@@ -242,7 +294,7 @@ client.on("messageUpdate", async (oldM, newM) => { // Message Edited
 });
 client.on("guildBanRemove", async (guild, user) => { // Ban Remove
     const embed = new MessageEmbed()
-        .setTitle("Message Edited")
+        .setTitle("Ban Removed")
         .setColor(9427684)
         .setDescription("<@"+user.id+"> was unbanned.")
         .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
@@ -256,7 +308,7 @@ client.on("guildBanRemove", async (guild, user) => { // Ban Remove
 client.on("userUpdate", async (oldM, newM) => { // User Updated (Name)
     if(oldM.username !== newM.username){
         const embed = new MessageEmbed()
-            .setTitle("Message Edited")
+            .setTitle("userUpdate")
             .setColor(9427684)
             .setDescription("<@"+newM.id+"> renamed.\n**Old:** "+oldM.username+"\n**New:** "+newM.username)
             .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
