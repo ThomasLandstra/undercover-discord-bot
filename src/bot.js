@@ -1,13 +1,12 @@
 // Requirements
 require("dotenv").config();
-const { Client, MessageEmbed } = require("discord.js");
+const { Client, MessageEmbed, Channel } = require("discord.js");
 
 // Create required variables
-const client = new Client({
-    partials: ["MESSAGE", "REACTION"]
-});
+const client = new Client({partials: ["MESSAGE", "REACTION"]});
 const prefix = "-";
 const roleReactMsg = "827434586589102110";
+const loggingChannel = "709891365709938728";
 
 // Start Message
 client.on('ready', () => {
@@ -107,6 +106,48 @@ client.on("messageReactionRemove", async (reaction, user) => {
         }
     }
 }); 
+
+// Logging
+client.on("channelPinsUpdate", async (channel, time) => {
+    const embed = new MessageEmbed()
+        .setTitle("Channel Pins Updated")
+        .setColor(9427684)
+        .setDescription("New channel pin in <#"+ channel.id +">")
+        .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
+    client.channels.cache.get(loggingChannel).send(embed);
+});
+client.on("guildMemberRemove", async member => {
+    const embed = new MessageEmbed()
+        .setTitle("Member Left")
+        .setColor(9427684)
+        .setDescription("<@"+ member.id +"> left the server.")
+        .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
+    client.channels.cache.get(loggingChannel).send(embed);
+});
+client.on("inviteDelete", async invite => {
+    const embed = new MessageEmbed()
+        .setTitle("Invite Deleted")
+        .setColor(9427684)
+        .setDescription("Invite Deleted:\n"+invite.channel+"\n["+invite.url+"]("+invite.url+")")
+        .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
+    client.channels.cache.get(loggingChannel).send(embed);
+});
+client.on("messageDelete", async message => {
+    const embed = new MessageEmbed()
+        .setTitle("Message Deleted")
+        .setColor(9427684)
+        .setDescription("<@"+message.author.id+"> **in** <#"+message.channel.id+">\n"+message.content)
+        .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
+    client.channels.cache.get(loggingChannel).send(embed);
+});
+client.on("messageUpdate", async (oldM, newM) => {
+    const embed = new MessageEmbed()
+        .setTitle("Message Edited")
+        .setColor(9427684)
+        .setDescription("Message from <@"+oldM.author.id+"> in <#"+oldM.channel.id+"> edited\n**Old:** "+oldM.content+"\n**New:** "+newM.content)
+        .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
+    client.channels.cache.get(loggingChannel).send(embed);
+});
 
 // Run bot
 client.login(process.env.DISCORDJS_BOT_TOKEN);
