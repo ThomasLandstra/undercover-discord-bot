@@ -242,7 +242,7 @@ client.on("messageUpdate", async (oldM, newM) => { // Message Edited
 });
 client.on("guildBanRemove", async (guild, user) => { // Ban Remove
     const embed = new MessageEmbed()
-        .setTitle("Message Edited")
+        .setTitle("Ban removeed")
         .setColor(9427684)
         .setDescription("<@"+user.id+"> was unbanned.")
         .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
@@ -256,7 +256,7 @@ client.on("guildBanRemove", async (guild, user) => { // Ban Remove
 client.on("userUpdate", async (oldM, newM) => { // User Updated (Name)
     if(oldM.username !== newM.username){
         const embed = new MessageEmbed()
-            .setTitle("Message Edited")
+            .setTitle("Username Changed")
             .setColor(9427684)
             .setDescription("<@"+newM.id+"> renamed.\n**Old:** "+oldM.username+"\n**New:** "+newM.username)
             .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
