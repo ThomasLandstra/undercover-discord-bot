@@ -240,7 +240,7 @@ client.on("messageUpdate", async (oldM, newM) => { // Message Edited
         console.log(embed.description);
     }
 });
-client.on("guildBanRemove", async (guild, user) => {
+client.on("guildBanRemove", async (guild, user) => { // Ban Remove
     const embed = new MessageEmbed()
         .setTitle("Message Edited")
         .setColor(9427684)
@@ -253,7 +253,7 @@ client.on("guildBanRemove", async (guild, user) => {
         console.log(embed.description);
     }
 });
-client.on("userUpdate", async (oldM, newM) => {
+client.on("userUpdate", async (oldM, newM) => { // User Updated (Name)
     if(oldM.username !== newM.username){
         const embed = new MessageEmbed()
             .setTitle("Message Edited")
