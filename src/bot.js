@@ -9,6 +9,7 @@ const adminRoles = [];
 const roleReactMsg = "827434586589102110";
 const loggingChannel = "709891365709938728";
 
+
 // Start Message
 client.on('ready', () => {
     console.log("Undercover bot is online @ " + client.readyAt + ".");
@@ -29,6 +30,12 @@ client.on('message', async message => {
             } catch (error) {
                 console.log("Error sending message for ping command: " + Date());
                 console.log(error);
+                try {
+                    message.channel.send("Something went wrong.");
+                } catch (error) {
+                    console.log("Couldn't send error message to discord.");
+                    console.log(error);
+                }
             }
         }
 
@@ -47,6 +54,12 @@ client.on('message', async message => {
             } catch (error) {
                 console.log("Error sending message for reactMsg command: " + Date());
                 console.log(error);
+                try {
+                    message.channel.send("Something went wrong.");
+                } catch (error) {
+                    console.log("Couldn't send error message to discord.");
+                    console.log(error);
+                }
             }
         }
 
@@ -66,6 +79,12 @@ client.on('message', async message => {
             } catch (error) {
                 console.log("Error sending message for help command: " + Date());
                 console.log(error);
+                try {
+                    message.channel.send("Something went wrong.");
+                } catch (error) {
+                    console.log("Couldn't send error message to discord.");
+                    console.log(error);
+                }
             }
         }
 
@@ -88,6 +107,12 @@ client.on('message', async message => {
                     } catch (error) {
                         console.log("Error occured when kicking <@"+member.id+">. " + Date());
                         console.log(error);
+                        try {
+                            message.channel.send("Something went wrong. We couldn't kick <@"+member.id+">.");
+                        } catch (error) {
+                            console.log("Couldn't send error message to discord.");
+                            console.log(error);
+                        }
                     }
                 }
 
@@ -107,6 +132,12 @@ client.on('message', async message => {
                     } catch (error) {
                         console.log("Error occured when banning <@"+member.id+">. " + Date());
                         console.log(error);
+                        try {
+                            message.channel.send("Something went wrong. We couldn't ban <@"+member.id+">.");
+                        } catch (error) {
+                            console.log("Couldn't send error message to discord.");
+                            console.log(error);
+                        }
                     }
                 }
 
@@ -116,6 +147,12 @@ client.on('message', async message => {
                         .catch(err => {
                             console.log("Error occured when purgin messaged: " + Date())
                             console.log(err);
+                            try {
+                                message.channel.send("Something went wrong.");
+                            } catch (error) {
+                                console.log("Couldn't send error message to discord.");
+                                console.log(error);
+                            }
                         });
                 }
             } else if(cmd === "kick" || cmd === "ban" || cmd === "purge"){
@@ -125,6 +162,7 @@ client.on('message', async message => {
     }
 
 });
+
 
 // On Reaction Add
 client.on("messageReactionAdd", async (reaction, user) => {
@@ -140,6 +178,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
                 } catch (error) {
                     console.log("Error adding role Youtuber to @<"+user.id+">: " + Date());
                     console.log(error);
+                    reaction.remove;
                 }
                 break;
             case "twitch_streamer":
@@ -148,6 +187,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
                 } catch (error) {
                     console.log("Error adding role Twitch Streamere to @<"+user.id+">: " + Date());
                     console.log(error);
+                    reaction.remove;
                 }
                 break;
             case "📄":
@@ -156,6 +196,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
                 } catch (error) {
                     console.log("Error adding role announce misc to @<"+user.id+">: " + Date());
                     console.log(error);
+                    reaction.remove;
                 }
                 break;
             case "🎪":
@@ -164,6 +205,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
                 } catch (error) {
                     console.log("Error adding role announce events to @<"+user.id+">: " + Date());
                     console.log(error);
+                    reaction.remove;
                 }
                 break;
             case "📸":
@@ -172,6 +214,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
                 } catch (error) {
                     console.log("Error adding role announce youtube vids to @<"+user.id+">: " + Date());
                     console.log(error);
+                    reaction.remove;
                 }
                 break;
         }
@@ -229,6 +272,7 @@ client.on("messageReactionRemove", async (reaction, user) => {
         }
     }
 }); 
+
 
 // Logging
 client.on("channelPinsUpdate", async (channel, time) => { // Channel Pins
@@ -324,6 +368,7 @@ client.on("userUpdate", async (oldM, newM) => { // User Updated (Name)
         }
     }
 });
+
 
 // Run bot
 client.login(process.env.DISCORDJS_BOT_TOKEN);
