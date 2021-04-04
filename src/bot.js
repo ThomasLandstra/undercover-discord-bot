@@ -380,7 +380,7 @@ client.on("guildBanRemove", async (guild, user) => { // Ban Remove
 client.on("userUpdate", async (oldM, newM) => { // User Updated (Name)
     if(oldM.username !== newM.username){
         const embed = new MessageEmbed()
-            .setTitle("userUpdate")
+            .setTitle("Username Changed")
             .setColor(9427684)
             .setDescription("<@"+newM.id+"> renamed.\n**Old:** "+oldM.username+"\n**New:** "+newM.username)
             .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
