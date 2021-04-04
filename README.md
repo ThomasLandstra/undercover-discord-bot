@@ -7,6 +7,10 @@ This is a discord bot made for the [Federation of CEOs](https://discord.gg/RWcnq
 
 ## Changelog
 
+### V0.4.0
+
+- Added Admin Commands
+
 ### V0.3.0
 
 - Added internal documentation
