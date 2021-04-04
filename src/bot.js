@@ -104,6 +104,12 @@ client.on('message', async message => {
                             .setDescription("<@"+member.id+"> was kicked: " + reason)
                             .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
                         message.channel.send(embed);
+                        try {
+                            client.channels.cache.get(loggingChannel).send(embed);
+                        } catch (error) {
+                            console.log("Error sending log for user kick: " + Date());
+                            console.log(embed.description);
+                        }
                     } catch (error) {
                         console.log("Error occured when kicking <@"+member.id+">. " + Date());
                         console.log(error);
@@ -129,6 +135,12 @@ client.on('message', async message => {
                             .setDescription("<@"+member.id+"> was banned: " + reason)
                             .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
                         message.channel.send(embed);
+                        try {
+                            client.channels.cache.get(loggingChannel).send(embed);
+                        } catch (error) {
+                            console.log("Error sending log for user ban: " + Date());
+                            console.log(embed.description);
+                        }
                     } catch (error) {
                         console.log("Error occured when banning <@"+member.id+">. " + Date());
                         console.log(error);
@@ -143,17 +155,29 @@ client.on('message', async message => {
 
                 // Purge command
                 else if(cmd === "purge"){
-                    await message.channel.bulkDelete(parseInt(args[0]) + 1)
-                        .catch(err => {
-                            console.log("Error occured when purgin messaged: " + Date())
-                            console.log(err);
-                            try {
-                                message.channel.send("Something went wrong.");
-                            } catch (error) {
-                                console.log("Couldn't send error message to discord.");
-                                console.log(error);
-                            }
-                        });
+                    try {
+                        message.channel.bulkDelete(parseInt(args[0]) + 1);
+                        const embed = new MessageEmbed()
+                            .setTitle("Bulk Delete")
+                            .setColor(9427684)
+                            .setDescription("<@"+message.author+"> deleted "+ (parseInt(args[0]) + 1).toString+" messages.")
+                            .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
+                        try {
+                            client.channels.cache.get(loggingChannel).send(embed);
+                        } catch (error) {
+                            console.log("Error sending log for bulk message delete: " + Date());
+                            console.log(embed.description);
+                        }
+                    } catch (error) {
+                        console.log("Error occured when purging messages: " + Date())
+                        console.log(err);
+                        try {
+                            message.channel.send("Something went wrong.");
+                        } catch (error) {
+                            console.log("Couldn't send error message to discord.");
+                            console.log(error);
+                        }
+                    }
                 }
             } else if(cmd === "kick" || cmd === "ban" || cmd === "purge"){
                 message.channel.send("That's an admin command dummy.");
