@@ -11,6 +11,10 @@ This is a discord bot made for the [Federation of CEOs](https://discord.gg/RWcnq
 
 - Added Admin Commands
 
+#### Patch 0.4.1
+- Added better exception handling
+- Messages deleted by bots no longer send a log
+
 ### V0.3.0
 
 - Added internal documentation

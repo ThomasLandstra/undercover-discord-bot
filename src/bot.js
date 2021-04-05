@@ -339,6 +339,7 @@ client.on("inviteDelete", async invite => { // Invite Deleted
     }
 });
 client.on("messageDelete", async message => { // Message Deleted
+    if(message.author.bot) return;
     const embed = new MessageEmbed()
         .setTitle("Message Deleted")
         .setColor(9427684)
