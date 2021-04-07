@@ -3,7 +3,7 @@
 
 # Undercover Discord Bot
 
-This is a discord bot made for the [Federation of CEOs](https://discord.gg/RWcnqmF) discord server. Feel free to copy the code. Be aware that this is my first proper node js project and also my first discord bot so copy with caution.
+This is a discord bot made for the [Federation of CEOs](https://discord.gg/RWcnqmF) discord server. Feel free to copy the code. Be aware that this is my first proper node js project and also my first discord bot so please copy with caution.
 
 ## Changelog
 
