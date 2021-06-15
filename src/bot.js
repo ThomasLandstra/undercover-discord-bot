@@ -5,9 +5,7 @@ const { Client, MessageEmbed, Channel } = require("discord.js");
 // Create required variables
 const client = new Client({partials: ["MESSAGE", "REACTION"]});
 const prefix = "-";
-const adminRoles = [];
 const roleReactMsg = "827434586589102110";
-const loggingChannel = "709891365709938728";
 
 
 // Start Message
@@ -85,102 +83,6 @@ client.on('message', async message => {
                     console.log("Couldn't send error message to discord.");
                     console.log(error);
                 }
-            }
-        }
-
-        // Admin Commands
-        for(let x = 0;x>adminRoles.length;x++){
-            if(message.member.roles.cache.has(adminRoles[x])){
-                // Kick command
-                if(cmd === "kick"){
-                    try {
-                        let member = message.mentions.members.first();
-                        const reason = args[1, args.length-1].join(" ")+".";
-                        member.kick(reason);
-                        message.delete();
-                        const embed = new MessageEmbed()
-                            .setTitle("Undercover Bot ")
-                            .setColor(2072139)
-                            .setDescription("<@"+member.id+"> was kicked: " + reason)
-                            .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-                        message.channel.send(embed);
-                        try {
-                            client.channels.cache.get(loggingChannel).send(embed);
-                        } catch (error) {
-                            console.log("Error sending log for user kick: " + Date());
-                            console.log(embed.description);
-                        }
-                    } catch (error) {
-                        console.log("Error occured when kicking <@"+member.id+">. " + Date());
-                        console.log(error);
-                        try {
-                            message.channel.send("Something went wrong. We couldn't kick <@"+member.id+">.");
-                        } catch (error) {
-                            console.log("Couldn't send error message to discord.");
-                            console.log(error);
-                        }
-                    }
-                }
-
-                // Ban command
-                else if(cmd === "ban"){
-                    try {
-                        let member = message.mentions.members.first();
-                        const reason = args[1, args.length-1].join(" ")+".";
-                        member.ban(reason);
-                        message.delete();
-                        const embed = new MessageEmbed()
-                            .setTitle("Undercover Bot ")
-                            .setColor(2072139)
-                            .setDescription("<@"+member.id+"> was banned: " + reason)
-                            .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-                        message.channel.send(embed);
-                        try {
-                            client.channels.cache.get(loggingChannel).send(embed);
-                        } catch (error) {
-                            console.log("Error sending log for user ban: " + Date());
-                            console.log(embed.description);
-                        }
-                    } catch (error) {
-                        console.log("Error occured when banning <@"+member.id+">. " + Date());
-                        console.log(error);
-                        try {
-                            message.channel.send("Something went wrong. We couldn't ban <@"+member.id+">.");
-                        } catch (error) {
-                            console.log("Couldn't send error message to discord.");
-                            console.log(error);
-                        }
-                    }
-                }
-
-                // Purge command
-                else if(cmd === "purge"){
-                    try {
-                        message.channel.bulkDelete(parseInt(args[0]) + 1);
-                        const embed = new MessageEmbed()
-                            .setTitle("Bulk Delete")
-                            .setColor(9427684)
-                            .setDescription("<@"+message.author+"> deleted "+ (parseInt(args[0]) + 1).toString+" messages.")
-                            .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-                        try {
-                            client.channels.cache.get(loggingChannel).send(embed);
-                        } catch (error) {
-                            console.log("Error sending log for bulk message delete: " + Date());
-                            console.log(embed.description);
-                        }
-                    } catch (error) {
-                        console.log("Error occured when purging messages: " + Date())
-                        console.log(err);
-                        try {
-                            message.channel.send("Something went wrong.");
-                        } catch (error) {
-                            console.log("Couldn't send error message to discord.");
-                            console.log(error);
-                        }
-                    }
-                }
-            } else if(cmd === "kick" || cmd === "ban" || cmd === "purge"){
-                message.channel.send("That's an admin command dummy.");
             }
         }
     }
@@ -296,103 +198,6 @@ client.on("messageReactionRemove", async (reaction, user) => {
         }
     }
 }); 
-
-
-// Logging
-client.on("channelPinsUpdate", async (channel, time) => { // Channel Pins
-    const embed = new MessageEmbed()
-        .setTitle("Channel Pins Updated")
-        .setColor(9427684)
-        .setDescription("New channel pin in <#"+ channel.id +">")
-        .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-    try {
-        client.channels.cache.get(loggingChannel).send(embed);
-    } catch (error) {
-        console.log("Error sending log for channel pins updated: " + Date());
-        console.log(embed.description);
-    }
-});
-client.on("guildMemberRemove", async member => { // Member Left
-    const embed = new MessageEmbed()
-        .setTitle("Member Left")
-        .setColor(9427684)
-        .setDescription("<@"+ member.id +"> left the server.")
-        .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-    try {
-        client.channels.cache.get(loggingChannel).send(embed);
-    } catch (error) {
-        console.log("Error sending log for user leaving: " + Date());
-        console.log(embed.description);
-    }
-});
-client.on("inviteDelete", async invite => { // Invite Deleted
-    const embed = new MessageEmbed()
-        .setTitle("Invite Deleted")
-        .setColor(9427684)
-        .setDescription("Invite Deleted:\n"+invite.channel+"\n["+invite.url+"]("+invite.url+")")
-        .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-    try {
-        client.channels.cache.get(loggingChannel).send(embed);
-    } catch (error) {
-        console.log("Error sending log for invite deleted: " + Date());
-        console.log(embed.description);
-    }
-});
-client.on("messageDelete", async message => { // Message Deleted
-    if(message.author.bot) return;
-    const embed = new MessageEmbed()
-        .setTitle("Message Deleted")
-        .setColor(9427684)
-        .setDescription("<@"+message.author.id+"> **in** <#"+message.channel.id+">\n"+message.content)
-        .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-    try {
-        client.channels.cache.get(loggingChannel).send(embed);
-    } catch (error) {
-        console.log("Error sending log for message deleted: " + Date());
-        console.log(embed.description);
-    }
-});
-client.on("messageUpdate", async (oldM, newM) => { // Message Edited
-    const embed = new MessageEmbed()
-        .setTitle("Message Edited")
-        .setColor(9427684)
-        .setDescription("Message from <@"+oldM.author.id+"> in <#"+oldM.channel.id+"> edited\n**Old:** "+oldM.content+"\n**New:** "+newM.content)
-        .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-    try {
-        client.channels.cache.get(loggingChannel).send(embed);
-    } catch (error) {
-        console.log("Error sending log for message upated: " + Date());
-        console.log(embed.description);
-    }
-});
-client.on("guildBanRemove", async (guild, user) => { // Ban Remove
-    const embed = new MessageEmbed()
-        .setTitle("Ban Removed")
-        .setColor(9427684)
-        .setDescription("<@"+user.id+"> was unbanned.")
-        .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-    try {
-        client.channels.cache.get(loggingChannel).send(embed);
-    } catch (error) {
-        console.log("Error sending log for member unbanned: " + Date());
-        console.log(embed.description);
-    }
-});
-client.on("userUpdate", async (oldM, newM) => { // User Updated (Name)
-    if(oldM.username !== newM.username){
-        const embed = new MessageEmbed()
-            .setTitle("Username Changed")
-            .setColor(9427684)
-            .setDescription("<@"+newM.id+"> renamed.\n**Old:** "+oldM.username+"\n**New:** "+newM.username)
-            .setFooter(`${client.user.username}`, "https://i.imgur.com/k6EqY8f.png");
-        try {
-            client.channels.cache.get(loggingChannel).send(embed);
-        } catch (error) {
-            console.log("Error sending log for member changedd: " + Date());
-            console.log(embed.description);
-        }
-    }
-});
 
 
 // Run bot
