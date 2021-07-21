@@ -1,5 +1,5 @@
 
-[![Discord](https://img.shields.io/discord/708938277285003336.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/RWcnqmF)
+[![Discord](https://img.shields.io/discord/708938277285003336.svg?label=&logo=discord&logoColor=ffffff&color=7389D8&labelColor=6A7EC2)](https://discord.gg/RWcnqmF) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) ![Version: 4.0.0](https://img.shields.io/badge/Version-V4.0.0-blue)
 
 # Undercover Discord Bot
 
@@ -37,3 +37,6 @@ This is a discord bot made for the [Federation of CEOs](https://discord.gg/RWcnq
 
 - added ping command.
 - added role reaction.
+
+## License
+This bot is shared under the [MIT license](https://github.com/ThomasLandstra/undercover-discord-bot/blob/main/LICENSE).
